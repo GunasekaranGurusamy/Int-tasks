@@ -1,7 +1,11 @@
-﻿namespace Int_tasks
+﻿using Int_tasks.DTO;
+
+namespace Int_tasks
 {
     public class Filter
     {
+
+        #region Add-Data
         List<Player> cricketPlayerList=new List<Player>
         {
             new Player{PlayerId=1, PlayerName ="Ramesh"},
@@ -27,6 +31,7 @@
             new Player{PlayerId=4, PlayerName ="Deepak"},
             new Player{PlayerId=6, PlayerName ="Amith"}
         };
+        #endregion
 
         //Print each player from above playerList as CricketPlayer or FootballPlayer or both or none based on data.
         public void findPlayersName()
@@ -68,25 +73,7 @@
             {
                 Console.WriteLine($"Item Id: {item.PlayerId}, Name: {item.PlayerName}");
             }
-
-            //Console.WriteLine(result);
-            Console.Read();
         }
-    }
-
-
-    public class Result
-    {
-
-        public string PlayerName { get; set; }
-        public string Type { get; set; }
-    }
-
-
-    public class Player
-    {
-        public string PlayerName { get; set; }
-        public int PlayerId { get; set; }
     }
 
 }

@@ -5,13 +5,13 @@ public class Program
 {
     static void Main(string[] args)
     {
-
-        Linq objLinqquery = new Linq();
-        objLinqquery.getstandardcount();
-        Console.ReadLine();
-        // FindTest();
+                                /*--Remove Duplicates only -- IP:{12, 5, 5, 22}  -- OP:{12,5,22}*/
+        RemoveDuplicates();
+                                /*--Remove Duplicates and Original value -- IP:{12, 5, 5, 22}  -- OP:{12,22}*/
+        //removeduplicatenumbers();
+                                /*--Get Charector Count -- IP:{G,G,A}  -- OP:G=2 A=1*/
         //GetCharCount("GUNAGUNAGUNA".ToCharArray());
-
+                                /*--Find Max and Min value --IP:{1,45,78,34} --OP:MAx:78,Min:1 */
         //findminmax();
 
         //findthirdlargest();
@@ -30,33 +30,81 @@ public class Program
 
         //forech_parallelforech();
 
+
+        //Linq objLinqquery = new Linq();
+        /*get standard based count*/
+        //objLinqquery.getstandardcount();
+        /*List out the student name based on Standards*/
+        //objLinqquery.getstudentdetails();
+
+        Console.ReadLine();
     }
 
-    static void FindTest()
+    static void RemoveDuplicates()
     {
         int[] request = { 12, 5, 5, 22, 9, 5, 78, 1, 9, 7, 1 };
-        int max = request[0];
-        int min = request[0];
-        int[] res = new int[request.Length];
+        int[] response = new int[request.Length];
         int index = 0;
-        for (int i = 0; i < request.Length; i++)
+        for(int i=0; i < request.Length; i++)
         {
-            for (int j = 0; j < request.Length; j++)
+            if (!response.Any(x => x == request[i]))
             {
-                if (request[i] != request[j] && i != j)
+                response[index] = request[i];
+                index++;
+            }
+        }
+        Array.Resize(ref response,index);
+        printArray(response);
+    }
+
+    static void removeduplicatenumbers()
+    {
+        int[] arr = { 12, 5, 5, 22, 9, 5, 78, 1, 9, 7, 1 };
+        int[] Result = new int[arr.Length];
+        int index = 0;
+        for (int i = 0; i < arr.Length; i++)
+        {
+            bool isValid = true;
+            for (int j = i + 1; j < arr.Length; j++)
+            {
+                if (arr[i] == arr[j])
                 {
-                    if (!res.Any(x => x == request[i]))
-                    {
-                        res[index] = request[i]; index += 1; break;
-                    }
+                    isValid = false; break;
+                }
+            }
+
+            if (isValid)
+            {
+                Result[index] = arr[i]; index++;
+            }
+        }
+        //result: {12,5,22,9,78,1,7,0,0,0} 
+        Array.Resize(ref Result, index);
+
+        //result: {12,5,22,9,78,1,7} 
+
+        int item = 0;
+        for (int x = 0; x < Result.Length; x++)
+        {
+            for (int y = x + 1; y < Result.Length; y++)
+            {
+                if (Result[x] > Result[y])
+                {
+                    item = Result[x];
+                    Result[x] = Result[y];
+                    Result[y] = item;
                 }
             }
         }
-        foreach (int x in res.Where(x => x > 0))
-        {
-            Console.WriteLine(x);
-        }
+        //After Sorting : {1,5,7,9,12,22,78}
+        printArray(Result);
+        //foreach (var i in Result)
+        //{
+        //    Console.WriteLine(i);
+        //}
+
     }
+
 
     static void findminmax()
     {
@@ -102,53 +150,6 @@ public class Program
             }
         }
         Console.WriteLine(thirdHigh);
-    }
-
-    static void removeduplicatenumbers()
-    {
-        int[] arr = { 5, 6, 6, 1, 1, 2, 3, 3, 4 };
-        int[] Result = new int[arr.Length];
-        int index = 0;
-        for (int i = 0; i < arr.Length; i++)
-        {
-            bool isValid = true;
-            for (int j = i + 1; j < arr.Length; j++)
-            {
-                if (arr[i] == arr[j])
-                {
-                    isValid = false; break;
-                }
-            }
-
-            if (isValid)
-            {
-                Result[index] = arr[i]; index++;
-            }
-        }
-        //result: {5,6,1,2,3,4,0,0,0} 
-        Array.Resize(ref Result, index);
-
-        //result: {5,6,1,2,3,4} 
-
-        int item = 0;
-        for (int x = 0; x < Result.Length; x++)
-        {
-            for (int y = x + 1; y < Result.Length; y++)
-            {
-                if (Result[x] > Result[y])
-                {
-                    item = Result[x];
-                    Result[x] = Result[y];
-                    Result[y] = item;
-                }
-            }
-        }
-        //After Sorting : {1,2,3,4,5,6}
-        foreach (var i in Result)
-        {
-            Console.WriteLine(i);
-        }
-
     }
 
     static void AddEvenAscDesc()

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Int_tasks.DTO;
 
 namespace Int_tasks
 {
     public class Linq
     {
-
+        #region Add-Data
         IList<Student> studentList = new List<Student>() {
                     new Student() { StudentID = 1, StudentName = "John", Age = 13, StandardID =1 },
                     new Student() { StudentID = 2, StudentName = "Moin",  Age = 21, StandardID =1 },
@@ -21,6 +17,7 @@ namespace Int_tasks
                     new Standard(){ StandardID = 1, StandardName="Standard 1"},
                     new Standard(){ StandardID = 2, StandardName="Standard 2"},
                     new Standard(){ StandardID = 3, StandardName="Standard 3"} };
+        #endregion 
 
         public void getstandardcount()
         {
@@ -29,7 +26,7 @@ namespace Int_tasks
                           group sd by sd.StandardName into grp
                           select new { StandardName = grp.Key, Count = grp.Count() });
 
-            foreach (var x in Result) { Console.WriteLine("Standard:{0}  Count:{1}", x.StandardName, x.Count); }
+            foreach (var x in Result) { Console.WriteLine("Name:{0}  Count:{1}", x.StandardName, x.Count); }
         }
 
         public void getstudentdetails()
@@ -63,7 +60,7 @@ namespace Int_tasks
                                    select new { StandardName = grp.Key, Count = grp.Count() });
 
             foreach (var item in groupcountQuery) { Console.WriteLine("Name: {0}  Count:{1}", item.StandardName, item.Count); }
-            Console.ReadLine();
+            
 
             //inner join
             var linqQuery = (from std in standardList
@@ -78,11 +75,9 @@ namespace Int_tasks
             var output3 = linqQuery.GroupBy(x => x.StandardName).Take(10).ToList();
 
             //var output4 = linqQuery.GroupBy(x => x.StandardName).Skip(countOnoutput1 - 1).Take(1).ToList();
+
             var output5Asc = linqQuery.OrderBy(X => X.StudentName).ToList();
             var output6Desc = linqQuery.OrderByDescending(X => X.StudentName).ToList();
-
-
-
 
             //var linqQuery2 = (from techer in _appContext.TblShipments
             //                  join student in _appContext.TblBookings on techer.ShpId equals student.ShpId
@@ -95,20 +90,7 @@ namespace Int_tasks
             //var MAX = await linqQuery2.MaxAsync();
 
             //var MIN = await linqQuery2.MinAsync();
+
         }
-    }
-
-    public class Student
-    {
-        public int StudentID { get; set; }
-        public string StudentName { get; set; }
-        public int Age { get; set; }
-        public int StandardID { get; set; }
-    }
-
-    public class Standard
-    {
-        public int StandardID { get; set; }
-        public string StandardName { get; set; }
     }
 }
