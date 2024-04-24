@@ -1,41 +1,45 @@
 ﻿using Int_tasks;
-using System.Diagnostics;
-
+using System.Collections.Generic;
 public class Program
 {
     static void Main(string[] args)
     {
-                                /*--Remove Duplicates only -- IP:{12, 5, 5, 22}  -- OP:{12,5,22}*/
-        RemoveDuplicates();
-                                /*--Remove Duplicates and Original value -- IP:{12, 5, 5, 22}  -- OP:{12,22}*/
-        //removeduplicatenumbers();
-                                /*--Get Charector Count -- IP:{G,G,A}  -- OP:G=2 A=1*/
-        //GetCharCount("GUNAGUNAGUNA".ToCharArray());
-                                /*--Find Max and Min value --IP:{1,45,78,34} --OP:MAx:78,Min:1 */
-        //findminmax();
 
-        //findthirdlargest();
+        //RemoveDuplicates();                               /*--Remove Duplicates only -- IP:{12, 5, 5, 22}  -- OP:{12,5,22}*/
 
-        //removeduplicatenumbers();
+        //removeduplicatenumbers();                         /*--Remove Duplicates and Original value -- IP:{12, 5, 5, 22}  -- OP:{12,22}*/
 
-        //AddEvenAscDesc();
+        //GetCharCount("GUNAGUNAGUNA".ToCharArray());       /*--Get Charector Count -- IP:{G,G,A}  -- OP:G=2 A=1*/
 
-        //removeDuplicateChar();
+        //findminmax();                                     /*--Find Max and Min value --IP:{1,45,78,34} --OP:MAx:78,Min:1 */
 
-        //FindNonRepeatingString("kkllmmnnoopqpisli");
+        //findthirdlargest();                               /*--Find Third Largest nuber on given array*/
 
-        //reverseWords("Guna");
+        //AddEvenAscDesc();             /* --Add Index is ASC order Even index is Descending order Asc,Desc,Asc,Desc --IP: {45,1,2,78,34}   --OP:{1,78,2,45,34}*/
 
-        //FindDuplicateWordCount();
+        //removeDuplicateChar("Guunnnnnaaaaa");             /*Remove Duplicate charectors form given string.*/
+
+        //FindNonRepeatingString("Guunnnaasa");             /*Find Non Repeating String IP:Guunasaa  OP:Gns*/
+
+        //reverseWords("Guna".ToCharArray());               /*Reverse Given Charectors*/
+
+        //FindDuplicateWordCount();                         /*Find Duplicate Word Count*/    
+
+        //ChessBoardPattern();                              /*Create ChessBoard BluePrint*/
 
         //forech_parallelforech();
+        //int[] arr = { 2, 3, 5, 7, 10, 15, 20 };int target = 15;
+        //binarySearch(arr, 1, arr.Length - 1, target);                 /*Find given Value Index*/
 
+        //int[] request = { 5, 4, 8, 2, 1, 6, 7, 9, 3, 10 };
+        //bubbleSort(request);                                          /*Bubble Sort algorithm for sorting*/
 
         //Linq objLinqquery = new Linq();
         /*get standard based count*/
         //objLinqquery.getstandardcount();
         /*List out the student name based on Standards*/
         //objLinqquery.getstudentdetails();
+
 
         Console.ReadLine();
     }
@@ -77,12 +81,12 @@ public class Program
             {
                 Result[index] = arr[i]; index++;
             }
-        }
-        //result: {12,5,22,9,78,1,7,0,0,0} 
-        Array.Resize(ref Result, index);
+        }                                           //result: {12,5,22,9,78,1,7,0,0,0} 
+        Array.Resize(ref Result, index);            //result: {12,5,22,9,78,1,7} 
 
-        //result: {12,5,22,9,78,1,7} 
-
+        //Array.Sort(Result);                                       //After in-Build Sorting : {1,5,7,9,12,22,78};
+        //var _res=Result.OrderBy(x => x).Reverse().ToArray();      //After in-Build  with Reverse Sorting : {1,5,7,9,12,22,78} & {78,22,12,9,7,5,1};
+        //var res = Result.OrderByDescending(x => x).ToArray();       //After in-Build Sorting : {78,22,12,9,7,5,1};
         int item = 0;
         for (int x = 0; x < Result.Length; x++)
         {
@@ -95,16 +99,12 @@ public class Program
                     Result[y] = item;
                 }
             }
-        }
-        //After Sorting : {1,5,7,9,12,22,78}
+        }           //After Sorting : {1,5,7,9,12,22,78}
+
         printArray(Result);
-        //foreach (var i in Result)
-        //{
-        //    Console.WriteLine(i);
-        //}
+        //foreach (var i in Result) { Console.WriteLine(i); }
 
     }
-
 
     static void findminmax()
     {
@@ -128,6 +128,11 @@ public class Program
 
     static void findthirdlargest()
     {
+                                                    /* Using  In-Build function */
+        //int[] req = array;
+        //Array.Sort(req);
+        //Console.WriteLine(req[req.Length - 2]+"\n");
+                                                    /*without using in-build function*/
         int[] array = { 100, 2, 3, 24, 10, 40 };
         int firstHigh = array[0], secondHigh = 0, thirdHigh = 0;
 
@@ -149,37 +154,35 @@ public class Program
                 thirdHigh = array[i];
             }
         }
+
         Console.WriteLine(thirdHigh);
     }
 
     static void AddEvenAscDesc()
     {
         int[] request = { 2, 4, 6, 1, 12, 67, 90, 54, 10, 3 };
-        Console.WriteLine("Given Array: ");
-        foreach (var x in request) { Console.Write(+x + " "); }
-
         Array.Sort(request);
         int[] response = new int[request.Length];
-        int j = 1;
+        int j = 0;
         for (int i = 0; i < request.Length; i++)
         {
             if (i == 0 || i % 2 == 0)
             {
-                response[i] = i == 0 ? request[i] : request[i / 2];
+                response[i] = request[j]; j++;
             }
             else
             {
                 response[i] = request[request.Length - j];
-                j++;
             }
 
         }
-        Console.WriteLine(" ");
-        Console.WriteLine("output Array: ");
+
+        Console.WriteLine("Given Array: ");
+        printArray(request);
+        Console.WriteLine("\nOutPut Array: ");
         foreach (var x in response) { Console.Write(x + " "); }
     }
 
-    //remove duplicates from given words kkllmmnnoopqpisli to klmnopqis
     static void removeDuplicateChar(string myStr)
     {
         Console.WriteLine("Initial String: " + myStr);
@@ -208,13 +211,14 @@ public class Program
         }
     }
 
-    // Function to reverse words
-    static void reverseWords(string[] lstTxt)
+    static void reverseWords(char[] lstTxt)
     {
-        string str = "";
-        for (int i = lstTxt.Length - 1; i >= 0; i--) { str += lstTxt[i] + " "; }
+        //for (int i = lstTxt.Length - 1; i >= 0; i--) { Console.Write(lstTxt[i]); }
         Console.Write("\n Reversed String:");
-        Console.Write(str);
+        for (int i = 1; i <= lstTxt.Length; i++) 
+        {
+            Console.Write(lstTxt[lstTxt.Length - i]);
+        }
     }
 
     public static void GetCharCount(char[] req)
@@ -274,6 +278,21 @@ public class Program
 
     }
 
+    static void ChessBoardPattern()
+    {
+        int rows = 8;
+        int cols = 8;
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write(((i + j) % 2 == 0) ? "X " : "  ");
+            }
+            Console.WriteLine();
+        }
+    }
+
     static void forech_parallelforech()
     {
         List<string> fruits = new List<string>();
@@ -313,14 +332,16 @@ public class Program
         }
     }
 
-    static int binarySearch(int[] arr, int l, int r, int x)
+    static int binarySearch(int[] arr, int i, int l, int x)
     {
-        if (r >= l)
+        /*arr=>Array,   i=starting index,   l=total array length,   x = Target value */
+
+        if (l >= i)
         {
-            int mid = l + (r - l) / 2;
-            if (arr[mid] == x) { return mid; }
-            if (arr[mid] > x) { return binarySearch(arr, l, mid - 1, x); }
-            return binarySearch(arr, mid + 1, r, x);
+            int mid = i + (l - i) / 2;
+            if (arr[mid] == x) { Console.WriteLine(mid); }
+            if (arr[mid] > x) { return binarySearch(arr, i, mid - 1, x); }
+            return binarySearch(arr, mid + 1, l, x);
         }
         return -1;
     }
@@ -328,49 +349,28 @@ public class Program
     static void bubbleSort(int[] arr)
     {
         int n = arr.Length;
-        for (int i = 0; i < n - 1; i++)
+        for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < n - i - 1; j++)
+            for (int j = i+1; j < n; j++)
             {
-                int xval = n - i - 1;
-                int fval = arr[j];
-                int secval = arr[j + 1];
-                if (arr[j] > arr[j + 1])
+                if (arr[i] > arr[j])
                 {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
+        printArray(arr);
     }
 
     /* Prints the array */
     static void printArray(int[] arr)
     {
-        int n = arr.Length;
-        for (int i = 0; i < n; ++i)
-            Console.Write(arr[i] + " ");
+        for (int i = 0; i < arr.Length; ++i) { Console.Write(arr[i] + " "); }
         Console.WriteLine();
     }
 
-    private static void StartProcess()
-    {
-        try
-        {
-            ProcessStartInfo pro = new ProcessStartInfo();
-            pro.FileName = "cmd.exe";
-            pro.WorkingDirectory = @"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe";
-            Process proStart = new Process();
-            proStart.StartInfo = pro;
-            proStart.Start();
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-
-    }
 }
 
 interface IG1 { void sampleMethod(); }
