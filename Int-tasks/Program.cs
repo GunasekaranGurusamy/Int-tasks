@@ -35,10 +35,10 @@ public class Program
         //bubbleSort(request);                                          /*Bubble Sort algorithm for sorting*/
 
         //Linq objLinqquery = new Linq();
-        /*get standard based count*/
-        //objLinqquery.getstandardcount();
-        /*List out the student name based on Standards*/
-        //objLinqquery.getstudentdetails();
+
+        //objLinqquery.getstandardcount();                              /*get standard based count*/
+
+        //objLinqquery.getstudentdetails();                             /*List out the student name based on Standards*/
 
 
         Console.ReadLine();
@@ -166,7 +166,7 @@ public class Program
         int j = 0;
         for (int i = 0; i < request.Length; i++)
         {
-            if (i == 0 || i % 2 == 0)
+            if (i % 2 == 0)
             {
                 response[i] = request[j]; j++;
             }
@@ -355,9 +355,10 @@ public class Program
             {
                 if (arr[i] > arr[j])
                 {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+                    //int temp = arr[i];
+                    //arr[i] = arr[j];
+                    //arr[j] = temp;
+                    (arr[j], arr[i]) = (arr[i], arr[j]);
                 }
             }
         }
